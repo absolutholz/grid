@@ -1,0 +1,9 @@
+# Browsers that we support
+# https://github.com/browserslist/browserslist
+
+# Helpful testing tool
+# https://browserl.ist
+
+> 0.1% in DE
+# and last 2 version
+and not op_mini all
