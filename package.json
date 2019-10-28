@@ -1,0 +1,23 @@
+{
+  "name": "@absolutholz/grid",
+  "version": "1.0.0",
+  "description": "(S)CSS mixins, variables and code for a simple flexbox-base grid system",
+  "main": "grid.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/absolutholz/grid.git"
+  },
+  "keywords": [
+    "grid",
+    "flex"
+  ],
+  "author": "absolutholz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/absolutholz/grid/issues"
+  },
+  "homepage": "https://github.com/absolutholz/grid#readme"
+}
