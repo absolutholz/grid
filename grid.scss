@@ -1,0 +1,140 @@
+@import "grid_variables";
+@import "grid_mixins";
+@import "scss-mixins-functions-variables/scss/layout/media-query-mixins";
+
+%l-container {
+	@include make-container();
+}
+
+%l-row {
+	@include make-row();
+}
+
+%l-col {
+	@include make-col();
+}
+
+// [class^="l-container"],
+// [class*=" l-container"] {
+.l-container {
+	@extend %l-container;
+}
+
+// .l-container {
+// 	&--extra-wide {
+// 		max-width: $max-width-extra-wide;
+// 	}
+
+// 	&--full-width {
+// 		max-width: 100%;
+// 	}
+
+// 	&--narrow {
+// 		max-width: $narrow-width;
+// 	}
+// }
+
+@if $grid-row-classes {
+	.l-row {
+		@extend %l-row;
+
+		&--stretch {
+			@extend %l-row;
+			align-items: stretch;
+		}
+	}
+}
+
+@if $grid-column-classes {
+	[class^="l-col"],
+	[class*=" l-col"] {
+		@extend %l-col;
+
+		.l-row--stretch & > * {
+			height: 100%;
+		}
+	}
+}
+
+$_breakpoint-columns: 0; // don't set. only relevant to the following @each loop
+// Loop through the breakpoints configuration map to create the appropriate column span
+// scss placeholders, and optionally css selectors, for each breakpoint
+@each $breakpoint-name, $breakpoint-config in $breakpoints {
+	$breakpoint-min-width: map-get($breakpoint-config, "min-width");
+
+	// are columns defined for this breakpoint? If so, use them, if not keep using the values
+	// from the previous breakpoint
+	@if map-has-key($breakpoint-config, "columns") {
+		$_breakpoint-columns: map-get($breakpoint-config, "columns");
+	}
+
+	@if $breakpoint-min-width != 0 {
+		@include mq($breakpoint-min-width) {
+			@for $i from 1 through $_breakpoint-columns {
+				%l-col--#{$i}\/#{$_breakpoint-columns}\@#{$breakpoint-name} {
+					@include make-col-span($i, $_breakpoint-columns);
+				}
+
+				@if $grid-column-classes {
+					.l-col--#{$i}\/#{$_breakpoint-columns}\@#{$breakpoint-name} {
+						@extend %l-col--#{$i}\/#{$_breakpoint-columns}\@#{$breakpoint-name};
+					}
+				}
+			}
+		}
+	} @else {
+		@for $i from 1 through $_breakpoint-columns {
+			%l-col--#{$i}\/#{$_breakpoint-columns} {
+				@include make-col-span($i, $_breakpoint-columns);
+			}
+
+			@if $grid-column-classes {
+				.l-col--#{$i}\/#{$_breakpoint-columns} {
+					@extend %l-col--#{$i}\/#{$_breakpoint-columns};
+				}
+			}
+		}
+	}
+}
+
+:root {
+	@mixin set-gutter-custom-property(
+		$config,
+		$gutter-name: "gutter",
+		$offset-name: "offset",
+		$columns-name: "columns"
+	) {
+		@if map-has-key($config, $gutter-name) {
+			// sass and sass-lint have issues with css custom properties. that is why we have to define them in string interpolation format
+			// sass-lint:disable no-duplicate-properties
+			#{--gutter}: map-get($config, $gutter-name);
+			// #{--half-gutter}: map-get($config, $gutter-name) / 2;
+			// #{--double-gutter}: map-get($config, $gutter-name) * 2;
+			#{--gutter-y}: map-get($config, $gutter-name);
+			// #{--half-vertical-gutter}: map-get($config, $gutter-name) / 2;
+			// #{--double-vertical-gutter}: map-get($config, $gutter-name) * 2;
+		}
+
+		@if map-has-key($config, $offset-name) {
+			#{--offset}: map-get($config, $offset-name);
+		}
+
+		@if map-has-key($config, $columns-name) {
+			#{--columns}: map-get($config, $columns-name);
+		}
+	}
+
+	// @if $support-custom-properties-fallback {
+	@each $breakpoint-name, $breakpoint-config in $breakpoints {
+		$breakpoint-min-width: map-get($breakpoint-config, "min-width");
+
+		@if $breakpoint-min-width != 0 {
+			@include mq($breakpoint-min-width) {
+				@include set-gutter-custom-property($breakpoint-config);
+			}
+		} @else {
+			@include set-gutter-custom-property($breakpoint-config);
+		}
+	}
+	// }
+}

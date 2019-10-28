@@ -1,0 +1,65 @@
+$support-custom-properties-fallback: true !default;
+$support-flex-grid-fallback: true !default;
+
+$grid-column-classes: true !default;
+$grid-row-classes: true !default;
+
+$vertical-spacing-classes: true !default;
+
+$breakpoints: (
+	"xs": (
+		"min-width": 0,
+		"gutter": 15px,
+		"vertical-gutter": 24px,
+		"columns": 12,
+		"offset": 15px,
+	),
+	"sm": (
+		"min-width": 576px,
+	),
+	"md": (
+		"min-width": 768px,
+		"offset": 30px,
+	),
+	"lg": (
+		"min-width": 960px,
+		"gutter": 30px,
+		"offset": 47px,
+	),
+	"xl": (
+		"min-width": 1200px,
+		"vertical-gutter": 24px,
+	),
+) !default;
+
+$max-width: 1292px !default;
+// $max-width-extra-wide: 1440px !default;
+// $narrow-width: 987px !default;
+
+// Variables used as fallbacks for css custom properties, grid mixins and
+// such. Use the $breakpoints map for properly defining grid-relevant, responsive values.
+// Note: give these variables default values here so that they need not be defined centrally
+// if there is no need to override them.
+$grid-fallback-columns: 0;
+$grid-fallback-gutter: 0;
+$grid-fallback-vertical-gutter: 0;
+$grid-fallback-offset: 0;
+
+// loop through the breakpoint map to find the initial (mobile-first) values for the grid
+@each $breakpoint-name, $breakpoint-config in $breakpoints {
+	@if map-has-key($breakpoint-config, "columns") {
+		$grid-fallback-columns: map-get($breakpoint-config, "columns");
+	}
+
+	@if map-has-key($breakpoint-config, "gutter") {
+		$grid-fallback-gutter: map-get($breakpoint-config, "gutter");
+	}
+
+	@if map-has-key($breakpoint-config, "vertical-gutter") {
+		$grid-fallback-vertical-gutter: map-get($breakpoint-config, "vertical-gutter");
+	}
+
+	@if map-has-key($breakpoint-config, "offset") {
+		$grid-fallback-offset: map-get($breakpoint-config, "offset");
+	}
+}
