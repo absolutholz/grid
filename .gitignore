@@ -1,10 +1,9 @@
 
-# Created by https://www.gitignore.io/api/node,code,sass,java,linux,macos,windows,eclipse,intellij,webstorm,phpstorm,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=node,code,sass,java,linux,macos,windows,eclipse,intellij,webstorm,phpstorm,visualstudiocode
+# Created by https://www.gitignore.io/api/node,code,sass,linux,macos,windows,eclipse,intellij,webstorm,phpstorm,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=node,code,sass,linux,macos,windows,eclipse,intellij,webstorm,phpstorm,visualstudiocode
 
 ### Code ###
 .vscode/*
-.idea/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -110,11 +109,11 @@ local.properties
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
 # auto-import.
-.idea/modules.xml
-.idea/*.iml
-.idea/modules
-*.iml
-*.ipr
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
 
 # CMake
 cmake-build-*/
@@ -167,31 +166,6 @@ fabric.properties
 .idea/**/markdown-navigator.xml
 .idea/**/markdown-navigator/
 
-### Java ###
-# Compiled class file
-*.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-
 ### Linux ###
 *~
 
@@ -238,6 +212,7 @@ Temporary Items
 ### Node ###
 # Logs
 logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -477,9 +452,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# Magnolia
-webapp/target/*
-webapp/overlays/*
-module/target/*
-
-# End of https://www.gitignore.io/api/node,code,sass,java,linux,macos,windows,eclipse,intellij,webstorm,phpstorm,visualstudiocode
+# End of https://www.gitignore.io/api/node,code,sass,linux,macos,windows,eclipse,intellij,webstorm,phpstorm,visualstudiocode
