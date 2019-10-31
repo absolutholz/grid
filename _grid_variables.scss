@@ -1,40 +1,27 @@
-$support-custom-properties-fallback: true !default;
-$support-flex-grid-fallback: true !default;
-
-$grid-column-classes: true !default;
-$grid-row-classes: true !default;
-
-$vertical-spacing-classes: true !default;
-
 $breakpoints: (
 	"xs": (
+		"max-width": calc(100% - 2rem),
 		"min-width": 0,
 		"gutter": 15px,
-		"vertical-gutter": 24px,
 		"columns": 12,
-		"offset": 15px,
 	),
 	"sm": (
 		"min-width": 576px,
 	),
 	"md": (
 		"min-width": 768px,
-		"offset": 30px,
 	),
 	"lg": (
 		"min-width": 960px,
 		"gutter": 30px,
-		"offset": 47px,
 	),
 	"xl": (
+		"max-width": 1292px,
 		"min-width": 1200px,
-		"vertical-gutter": 24px,
 	),
 ) !default;
 
 $max-width: 1292px !default;
-// $max-width-extra-wide: 1440px !default;
-// $narrow-width: 987px !default;
 
 // Variables used as fallbacks for css custom properties, grid mixins and
 // such. Use the $breakpoints map for properly defining grid-relevant, responsive values.

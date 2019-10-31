@@ -1,26 +1,15 @@
-@import "grid_variables";
-@import "grid_placeholders";
+@import "grid_mixins";
 
-.l-container {
-	@extend %l-container;
+%l-container {
+	@include make-container();
 }
 
-.l-row {
-	@extend %l-row;
-
-	&--stretch {
-		@extend %l-row;
-		align-items: stretch;
-	}
+%l-row {
+	@include make-row();
 }
 
-[class^="l-col"],
-[class*=" l-col"] {
-	@extend %l-col;
-
-	.l-row--stretch & > * {
-		height: 100%;
-	}
+%l-col {
+	@include make-col();
 }
 
 $_breakpoint-columns: 0; // don't set. only relevant to the following @each loop
@@ -38,15 +27,15 @@ $_breakpoint-columns: 0; // don't set. only relevant to the following @each loop
 	@if $breakpoint-min-width != 0 {
 		@media (min-width: $breakpoint-min-width) {
 			@for $i from 1 through $_breakpoint-columns {
-				.l-col--#{$i}\/#{$_breakpoint-columns}\@#{$breakpoint-name} {
-					@extend %l-col--#{$i}\/#{$_breakpoint-columns}\@#{$breakpoint-name};
+				%l-col--#{$i}\/#{$_breakpoint-columns}\@#{$breakpoint-name} {
+					@include make-col-span($i, $_breakpoint-columns);
 				}
 			}
 		}
 	} @else {
 		@for $i from 1 through $_breakpoint-columns {
-			.l-col--#{$i}\/#{$_breakpoint-columns} {
-				@extend %l-col--#{$i}\/#{$_breakpoint-columns};
+			%l-col--#{$i}\/#{$_breakpoint-columns} {
+				@include make-col-span($i, $_breakpoint-columns);
 			}
 		}
 	}
